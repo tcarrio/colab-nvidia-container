@@ -5,13 +5,22 @@ A Docker container to act as a local runtime for [Google Colab](https://colab.re
 
 ## Run
 ```bash
-$ docker run --runtime=nvidia -it --rm -p 8081:8081 aecampos/docker-colab-local:latest
+$ docker run --runtime=nvidia -it --rm -p 8081:8081 sorokine/docker-colab-local:latest
 ```
 Or, to mount a volume so that it's accessible to colab:
 ```bash
-$ docker run --runtime=nvidia -it --rm -p 8081:8081 -v /host/directory:/opt/colab aecampos/colab-local:latest
+$ docker run --runtime=nvidia -it --rm -p 8081:8081 -v /host/directory:/opt/colab sorokine/docker-colab-local:latest
 ```
+
 where `/host/directory` is a path on your host machine.
+
+To make downloaded models persistent run as:
+
+```bash
+$ docker run --runtime=nvidia -it --rm -p 8081:8081 -v /host/directory:/opt/colab -v $HOME/.cache/torch:/root/.cache/torch sorokine/docker-colab-local:latest
+```
+
+This will use the same cache directory as models run on the host.
 
 ## Connecting
 If the container isn't running on your local machine, you'll need to forward port 8081:
