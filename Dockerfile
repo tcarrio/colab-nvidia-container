@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.2-base-ubuntu18.04
+FROM nvidia/cuda:10.1-base-ubuntu18.04
 
 MAINTAINER Adrian Campos "https://github.com/adriancampos"
 
