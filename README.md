@@ -37,4 +37,4 @@ In Colaboratory, click the "Connect" button and select "Connect to local runtime
 
 # TODO
 
- - [] use build args instead branches for images for different platforms and CUDA versions
+ - [ ] use build args instead branches for images for different platforms and CUDA versions
