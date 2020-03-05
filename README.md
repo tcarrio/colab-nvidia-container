@@ -9,18 +9,26 @@ $ docker run --runtime=nvidia -it --rm -p 8081:8081 sorokine/docker-colab-local:
 ```
 Or, to mount a volume so that it's accessible to colab:
 ```bash
-$ docker run --runtime=nvidia -it --rm -p 8081:8081 -v /host/directory:/opt/colab sorokine/docker-colab-local:latest
+$ docker run --runtime=nvidia -it --rm -p 8081:8081 -v "$PWD":/opt/colab sorokine/docker-colab-local:latest
 ```
 
-where `/host/directory` is a path on your host machine to put your notebooks.
+where `"$PWD"` is a full path on your host machine to put your notebooks (other than the ones hosted on colab) and other files created by the notebooks (e.g., computed indices).
 
 To make downloaded BERT models persistent run as:
 
 ```bash
-$ docker run --runtime=nvidia -it --rm -p 8081:8081 -v /host/directory:/opt/colab -v $HOME/.cache/torch:/root/.cache/torch sorokine/docker-colab-local:latest
+$ docker run --runtime=nvidia -it --rm -p 8081:8081 -v "$PWD":/opt/colab -v $HOME/.cache/torch:/root/.cache/torch sorokine/docker-colab-local:latest
 ```
 
 This will use the same cache directory as the models run on the host (if your host is Linux or Mac).
+
+If you do not have the latest CUDA installed on your system check which tags are available in docker hub repo and use the one for your version of CUDA, e.g.:
+
+```bash
+$ docker run --runtime=nvidia -it --rm -p 8081:8081 -v "$PWD":/opt/colab -v $HOME/.cache/torch:/root/.cache/torch sorokine/docker-colab-local:cuda-10.1
+```
+
+To find the version of CUDA on your system run `nvidia-smi`.
 
 ## Connecting
 If the container isn't running on your local machine, you'll need to forward port 8081:
