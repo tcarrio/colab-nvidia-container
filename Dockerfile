@@ -34,7 +34,7 @@ RUN pip install jupyterlab jupyter_http_over_ws ipywidgets google-colab\
     && jupyter nbextension enable --py widgetsnbextension
 
 # install task-specific packages
-RUN pip install pytorch-pretrained-bert sklearn transformers matplotlib
+RUN pip install pytorch-pretrained-bert sklearn transformers matplotlib annoy
 #RUN pip install google-colab
 
 EXPOSE 8081
