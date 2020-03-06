@@ -1,6 +1,8 @@
-FROM nvidia/cuda:10.1-base-ubuntu18.04
+ARG CUDA_VERSION=10.2
 
-MAINTAINER Adrian Campos "https://github.com/adriancampos"
+FROM nvidia/cuda:${CUDA_VERSION}-base-ubuntu18.04
+
+MAINTAINER Alex Sorokine "https://github.com/sorokine"
 
 # install Python
 ARG _PY_SUFFIX=3
