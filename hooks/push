@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -x
+
+for CUDA_VERSION in 10.1 10.2 latest; do
+    docker push $IMAGE_NAME:$CUDA_VERSION
+done
+

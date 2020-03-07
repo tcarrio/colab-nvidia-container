@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -x
+
+for CUDA_VERSION in 10.1 10.2; do
+    docker build --build-arg CUDA_VERSION=$CUDA_VERSION -t $IMAGE_NAME:$CUDA_VERSION .
+done
+
+docker tag $IMAGE_NAME:$CUDA_VERSION $IMAGE_NAME:latest
+
