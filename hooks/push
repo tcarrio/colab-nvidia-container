@@ -2,7 +2,9 @@
 
 set -x
 
+IFS=: read REPO_NAME REPO_TAG <<< "$IMAGE_NAME"
+
 for CUDA_VERSION in 10.1 10.2 latest; do
-    docker push $IMAGE_NAME:$CUDA_VERSION
+    docker push $REPO_NAME:$CUDA_VERSION
 done
 
