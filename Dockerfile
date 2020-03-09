@@ -36,7 +36,9 @@ RUN pip install jupyterlab jupyter_http_over_ws ipywidgets google-colab\
     && jupyter nbextension enable --py widgetsnbextension
 
 # install task-specific packages
-RUN pip install pytorch-pretrained-bert sklearn transformers matplotlib annoy
+RUN pip install pytorch-pretrained-bert sklearn transformers matplotlib
+# I do not know exactly why but annoy has to be installed seprately from other pips, otherwise it crashes the kernel
+RUN pip install annoy
 #RUN pip install google-colab
 
 EXPOSE 8081
