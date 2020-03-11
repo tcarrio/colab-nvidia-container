@@ -37,8 +37,7 @@ This will use the same cache directory as the models run on the host (if your ho
 ## Making Nvidia Work
 
 * on some docker versions replace `--runtime=nvidia` with `--gpus all`.
-* if you do not have a GPU or Nvidia drivers installed completely omit all nvidia flags from docker command
-
+* if you do not have a GPU or Nvidia drivers installed completely omit all nvidia flags from docker command.  The notebook will work but it will be slow.
 * if you do not have the latest CUDA installed on your system check which [tags](https://hub.docker.com/r/sorokine/docker-colab-local/tags) are available in docker hub repo and use the one for your version of CUDA, e.g.:
 
 ```bash
@@ -54,17 +53,16 @@ $ docker run \
 
 ## Connecting
 
-If the container isn't running on your local machine, you'll need to forward port 8081:
+If the container isn't running on your local machine, you'll need to forward port 8081.  Run this command from the system where you are runing your browser:
 ```
 $ ssh YOUR_REMOTE_MACHINE -L 8081:localhost:8081
 ```
 
-In Colaboratory, click the "Connect" button and select "Connect to local runtime...". Enter the port 8081 step in the dialog that appears and click the "Connect" button. (from [colaboratory](https://research.google.com/colaboratory/local-runtimes.html)).  Only `locahost` hostname is accepted (no numberic IPs).  Replace the token in the dialog box with the token that is shown after starting docker container, e.g.: `http://localhost:8081/?token=...`. 
-
+In Colaboratory, click the "Connect" button and select "Connect to local runtime...". Enter the port 8081 step in the dialog that appears and click the "Connect" button. (from [colaboratory](https://research.google.com/colaboratory/local-runtimes.html)).  Only `localhost` hostname is accepted (no numeric IPs).  Replace the token in the dialog box with the token that is shown in the terminal after starting docker container.  The connection string should look like `http://localhost:8081/?token=abcdef123456....`. 
 
 ## Notes
 
-* Missing some packages that come with Colab. Install them with `!pip install` in your notebook.
+* if some packages are missing install them with `!pip install` in your notebook.  This has to be repeated on kernel restart.
 
 # TODO
 
