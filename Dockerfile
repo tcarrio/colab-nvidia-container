@@ -41,6 +41,9 @@ RUN pip install pytorch-pretrained-bert sklearn transformers matplotlib
 RUN pip install annoy
 #RUN pip install google-colab
 
-EXPOSE 8081
+ARG COLAB_PORT=8081
+EXPOSE ${COLAB_PORT}
+ENV COLAB_PORT ${COLAB_PORT}
 
-CMD ["jupyter","notebook","--NotebookApp.allow_origin='https://colab.research.google.com'","--allow-root","--port","8081","--NotebookApp.port_retries=0","--ip","0.0.0.0"]
+CMD jupyter notebook --NotebookApp.allow_origin='https://colab.research.google.com' --allow-root --port $COLAB_PORT --NotebookApp.port_retries=0 --ip 0.0.0.0
+
