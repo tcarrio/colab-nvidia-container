@@ -55,10 +55,26 @@ $ docker run \
 
 If the container isn't running on your local machine, you'll need to forward port 8081.  Run this command from the system where you are runing your browser:
 ```
-$ ssh YOUR_REMOTE_MACHINE -L 8081:localhost:8081
+$ ssh MACHINE_WHERE_DOCKER_IS_RUNNING -L 8081:localhost:8081
 ```
 
 In Colaboratory, click the "Connect" button and select "Connect to local runtime...". Enter the port 8081 step in the dialog that appears and click the "Connect" button. (from [colaboratory](https://research.google.com/colaboratory/local-runtimes.html)).  Only `localhost` hostname is accepted (no numeric IPs).  Replace the token in the dialog box with the token that is shown in the terminal after starting docker container.  The connection string should look like `http://localhost:8081/?token=abcdef123456....`. 
+
+If your recieve an error like `0.0.0.0:8081 failed: port is already allocated.`. try running container on a diferent port, for example for port 8082:
+
+```bash
+$ docker run \
+  --runtime=nvidia \
+  -it --rm -p 8082:8081 \
+  -v "$PWD":/opt/colab \
+  -v $HOME/.cache/torch:/root/.cache/torch \
+  sorokine/docker-colab-local:latest
+```
+
+Colab notebooks expect the port in connection and on the server to be the same.  To fix this problem without rebuilding the image forward the port with ssh: 
+```
+$ ssh MACHINE_WHERE_DOCKER_IS_RUNNING -L 8081:localhost:8082
+```
 
 ## Notes
 
@@ -67,3 +83,5 @@ In Colaboratory, click the "Connect" button and select "Connect to local runtime
 # TODO
 
 plans and pressing ussues will go here
+
+ * [ ] set jupyter port from docker CLI
