@@ -62,4 +62,4 @@ ARG COLAB_PORT=8081
 EXPOSE ${COLAB_PORT}
 ENV COLAB_PORT ${COLAB_PORT}
 
-CMD jupyter notebook --NotebookApp.allow_origin='https://colab.research.google.com' --allow-root --port $COLAB_PORT --NotebookApp.port_retries=0 --ip 0.0.0.0 --NotebookApp.token='' --NotebookApp.disable_check_xsrf=True
+CMD jupyter notebook --NotebookApp.allow_origin='https://colab.research.google.com' --allow-root --port $COLAB_PORT --NotebookApp.port_retries=0 --ip 0.0.0.0 --NotebookApp.token='' --NotebookApp.disable_check_xsrf=True > server.log 2>&1
