@@ -109,11 +109,39 @@ def ghfs():
     )
     return tunnel(server, 'ghfs')
 
+def wetty(port=4343):
+  USE_FREE_TOKEN = True  # @param {type:"boolean"}
+  TOKEN = ""  # @param {type:"string"}
+  REGION = "AP" #@param ["US", "EU", "AP", "AU", "SA", "JP", "IN"]
+  OUTPUT_DIR = "/"  # @param {type:"string"}
+  PORT_FORWARD = "ngrok"
+  HOME = '/content'
+  os.makedirs(f'{HOME}/tools/temp', exist_ok=True)
+  wettyBF = 'https://github.com/biplobsd/temp/releases/download/v0.001/wetty.tar.gz'
+  fileSN = f'{HOME}/tools/temp/wetty.tar.gz'
+  urlretrieve(wettyBF, fileSN)
+  with tarfile.open(fileSN, 'r:gz') as t:t.extractall(f'{HOME}/tools/')
+  os.remove(fileSN)
+  Popen(
+      f'{HOME}/tools/wetty/wetty --port {port} --bypasshelmet -b "/" -c "/bin/bash"'.split(),
+      cwd=os.getcwd())
+  server = PortForward_wrapper(
+    PORT_FORWARD, TOKEN, USE_FREE_TOKEN, [['wetty', '4343', 'http']], 
+    REGION.lower(), 
+    [f"{HOME}/.ngrok2/wetty.yml", 31199])
+  return tunnel(server, 'wetty')
+
+
 if platform.system() == "Linux":
   if 'ghfs' in sys.argv:
     name = "Installing go-http-file-server ..."
     print(name)
     ghfs()
+  
+  if 'wetty' in sys.argv:
+    name = "Installing wetty ..."
+    print(name)
+    wetty()
 
   if '-cpf' in sys.argv:
     print("...><..."*50)
