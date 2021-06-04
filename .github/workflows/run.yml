@@ -29,6 +29,9 @@ jobs:
     - name: go-http-file-server
       run: sudo python3 ./res/actionUtility.py ghfs -nt
     
+    - name: wetty
+      run: sudo python3 ./res/actionUtility.py wetty
+    
     - name: 1717 forwarding 
       run: sudo python3 ./res/actionUtility.py -cpf 'name ghfs' 'PORT_FORWARD ngrok' 'protocol http' 'port 1717' 'portAcc 4171' 'USE_FREE_TOKEN 0' 'TOKEN ${{ secrets.NGROK_AUTH_TOKEN_DEC }}'
     
