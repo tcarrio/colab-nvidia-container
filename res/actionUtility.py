@@ -1,5 +1,6 @@
-import os, sys, time, requests, platform, zipfile
+import os, sys, time, requests, platform, zipfile, tarfile
 from urllib.request import urlretrieve
+from subprocess import Popen
 
 HOME = os.path.expanduser("~")
 sys.path.append(f"{HOME}/")
