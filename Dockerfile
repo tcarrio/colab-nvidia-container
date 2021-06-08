@@ -56,7 +56,10 @@ RUN pip install jupyterlab jupyter_http_over_ws ipywidgets https://github.com/go
 # I do not know exactly why but annoy has to be installed seprately from other pips, otherwise it crashes the kernel
 #RUN pip install annoy
 
-RUN pip install google-colab psutil gdown
+RUN IMP='&\n        from google.colab._shell import Shell'; \
+    sed -i "s/def system_piped(s.*/$IMP/;s/def getoutput(s.*/$IMP/;s/system(self.v/Shell().&/;s/getoutput(self.v.*))/Shell().&[0]/" /usr/local/lib/python3.6/dist-packages/IPython/core/interactiveshell.py
+
+RUN pip install psutil gdown
 
 ARG COLAB_PORT=8081
 EXPOSE ${COLAB_PORT}
